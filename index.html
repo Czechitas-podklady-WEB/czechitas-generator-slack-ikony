@@ -179,7 +179,7 @@
 				if (label.length > 0) {
 					let fontSize = 1
 					while (true) {
-						context.font = `${fontSize}px ${fontFamily}`
+						context.font = `${fontSize}px ${fontFamily}, sans-serif`
 						if (
 							context.measureText(label).width >
 							size * (label.length === 1 ? 0.5 : 0.75)
@@ -204,6 +204,12 @@
 			text.addEventListener('input', render)
 			gradient.addEventListener('load', render)
 			offset.addEventListener('input', render)
+
+			document.fonts.ready.then(function () {
+				if (document.fonts.check(`1em ${fontFamily}`)) {
+					render()
+				}
+			})
 		</script>
 	</body>
 </html>
