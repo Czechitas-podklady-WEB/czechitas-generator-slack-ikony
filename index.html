@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="cd">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Czechitas generátor Slack ikony</title>
+		<meta name="color-scheme" content="light dark" />
+		<meta
+			name="theme-color"
+			media="(prefers-color-scheme: light)"
+			content="white"
+		/>
+		<meta
+			name="theme-color"
+			media="(prefers-color-scheme: dark)"
+			content="black"
+		/>
+		<style>
+			body {
+				font-family: sans-serif;
+				max-width: 40rem;
+				margin-left: auto;
+				margin-right: auto;
+				text-align: center;
+			}
+			button {
+				cursor: pointer;
+			}
+			.stage {
+				width: 400px;
+				margin: 0 auto;
+				border-radius: 10%;
+				overflow: hidden;
+				position: relative;
+				z-index: 0;
+			}
+			.stage::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				z-index: -1;
+				background-color: currentColor;
+				opacity: 0.1;
+			}
+			.canvas {
+				position: relative;
+				/*34px*/
+				width: 100%;
+				aspect-ratio: 1;
+			}
+			.controls {
+				padding-top: 1em;
+				display: flex;
+				align-items: center;
+				gap: 1em;
+				flex-direction: column;
+			}
+			.text {
+				font-size: 1.5em;
+				text-align: center;
+				width: 8ex;
+			}
+			.download {
+				display: inline-flex;
+				gap: 0.4em;
+				align-items: baseline;
+				color: inherit;
+			}
+			.download svg {
+				position: relative;
+				top: 0.2em;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Czechitas generátor Slack ikony</h1>
+		<div class="stage">
+			<canvas class="canvas" width="400" height="400"></canvas>
+		</div>
+		<div class="controls">
+			<input
+				class="text"
+				value="JS"
+				placeholder="Štítek"
+				autocomplete="off"
+				autofocus
+			/>
+			<a class="download" download="ikona.png">
+				stáhnout
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+				>
+					<path
+						d="M15.003 3h2.997v5h-2.997v-5zm8.997 1v20h-24v-24h20l4 4zm-19 5h14v-7h-14v7zm16 4h-18v9h18v-9z"
+						fill="currentColor"
+					/>
+				</svg>
+			</a>
+		</div>
+
+		<script>
+			const text = document.querySelector('.text')
+			const canvas = document.querySelector('.canvas')
+			const download = document.querySelector('.download')
+			const context = canvas.getContext('2d')
+			const size = canvas.width
+			const fontFamily = 'sans-serif'
+			const lineHeightCompensation = 1.1
+
+			context.fillStyle = '#ffffff'
+			context.textAlign = 'center'
+
+			const render = () => {
+				const label = text.value
+				context.clearRect(0, 0, canvas.width, canvas.height)
+				if (label.length > 0) {
+					let fontSize = 1
+					while (true) {
+						context.font = `${fontSize}px ${fontFamily}`
+						if (
+							context.measureText(label).width >
+							size * (label.length === 1 ? 0.5 : 0.75)
+						) {
+							fontSize--
+							break
+						}
+						fontSize++
+					}
+					const mMeasurement = context.measureText('M')
+					const actualFontHeight =
+						mMeasurement.actualBoundingBoxAscent +
+						mMeasurement.actualBoundingBoxDescent
+
+					context.fillText(label, size / 2, size / 2 + actualFontHeight / 2)
+				}
+				download.href = canvas.toDataURL('image/png')
+			}
+			render()
+
+			text.addEventListener('input', render)
+		</script>
+	</body>
+</html>
