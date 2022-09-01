@@ -1,0 +1,1 @@
+# Czechitas generátor Slack ikony
