@@ -4,6 +4,10 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Czechitas generátor Slack ikony</title>
+		<meta
+			name="description"
+			content="Nástroj pro vytváření ikon pro nové workspacy na Slacku."
+		/>
 		<meta name="color-scheme" content="light dark" />
 		<meta
 			name="theme-color"
@@ -22,11 +26,20 @@
 				margin-left: auto;
 				margin-right: auto;
 				text-align: center;
+				margin: 0 auto;
+				min-height: 80vh;
+				display: grid;
+				grid-template-rows: 1fr auto 2fr;
 			}
 			button {
 				cursor: pointer;
 			}
+			.content {
+				padding: 1em;
+				grid-row: 2;
+			}
 			.stage {
+				max-width: 100%;
 				width: 400px;
 				margin: 0 auto;
 				border-radius: 10%;
@@ -73,32 +86,34 @@
 		</style>
 	</head>
 	<body>
-		<h1>Czechitas generátor Slack ikony</h1>
-		<div class="stage">
-			<canvas class="canvas" width="400" height="400"></canvas>
-		</div>
-		<div class="controls">
-			<input
-				class="text"
-				value="JS"
-				placeholder="Štítek"
-				autocomplete="off"
-				autofocus
-			/>
-			<a class="download" download="ikona.png">
-				stáhnout
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-				>
-					<path
-						d="M15.003 3h2.997v5h-2.997v-5zm8.997 1v20h-24v-24h20l4 4zm-19 5h14v-7h-14v7zm16 4h-18v9h18v-9z"
-						fill="currentColor"
-					/>
-				</svg>
-			</a>
+		<div class="content">
+			<h1>Czechitas generátor Slack ikony</h1>
+			<div class="stage">
+				<canvas class="canvas" width="400" height="400"></canvas>
+			</div>
+			<div class="controls">
+				<input
+					class="text"
+					value="JS"
+					placeholder="Štítek"
+					autocomplete="off"
+					autofocus
+				/>
+				<a class="download" download="ikona.png">
+					stáhnout
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+					>
+						<path
+							d="M15.003 3h2.997v5h-2.997v-5zm8.997 1v20h-24v-24h20l4 4zm-19 5h14v-7h-14v7zm16 4h-18v9h18v-9z"
+							fill="currentColor"
+						/>
+					</svg>
+				</a>
+			</div>
 		</div>
 
 		<script>
