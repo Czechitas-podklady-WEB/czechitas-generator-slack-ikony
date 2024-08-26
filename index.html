@@ -3,10 +3,10 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Czechitas generátor Slack ikon</title>
+		<title>Czechitas generátor ikon</title>
 		<meta
 			name="description"
-			content="Nástroj pro vytváření ikon pro nové workspacy na Slacku."
+			content="Nástroj pro vytváření ikon ve stylu Czechitas."
 		/>
 		<meta name="color-scheme" content="light dark" />
 		<meta
@@ -26,11 +26,12 @@
 			content="https://slack.czechitas-podklady.cz/og-image.jpg"
 		/>
 		<link rel="shortcut icon" href="icon.png" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
 		<style>
-			@font-face {
-				font-family: 'Perfograma';
-				src: url('Perfograma-czechitas.cz.otf') format('opentype');
-			}
 			body {
 				font-family: sans-serif;
 				max-width: 40rem;
@@ -105,8 +106,8 @@
 	</head>
 	<body>
 		<div class="content">
-			<h1>Czechitas generátor Slack ikon</h1>
-			<p>Upravte si vlastní ikonu pro workspace na Slacku.</p>
+			<h1>Czechitas generátor ikon</h1>
+			<p>Upravte si vlastní ikonu ve stylu Czechitas.</p>
 			<div class="stage">
 				<canvas class="canvas" width="512" height="512"></canvas>
 			</div>
@@ -150,7 +151,7 @@
 			const offset = document.querySelector('.offset')
 			const context = canvas.getContext('2d')
 			const size = canvas.width
-			const fontFamily = 'Perfograma'
+			const fontFamily = 'Open Sans'
 			const gradient = new Image()
 			gradient.src = 'gradient.jpg'
 
@@ -189,7 +190,7 @@
 						context.font = `${fontSize}px ${fontFamily}, sans-serif`
 						if (
 							context.measureText(label).width >
-							size * (label.length === 1 ? 0.5 : 0.75)
+							size * (label.length === 1 ? 0.5 : 0.65)
 						) {
 							fontSize--
 							break
